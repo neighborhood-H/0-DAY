@@ -3,20 +3,20 @@
 
 - **Vulnerability Type:** Argument Injection (CWE-88)
 
-1.	Vulnerability Title
+## 1. Vulnerability Title
     
     a.  TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515 Ping of Death
 
-2. High-level overview of the vulnerability and the possible effect of using it
+## 2. High-level overview of the vulnerability and the possible effect of using it
 
     In the `setDiagnosisCfg` handler of the `/usr/sbin/lighttpd` executable, user-supplied parameters are embedded into a system command without validating or rejecting hyphen-prefixed arguments. This argument-injection issue (similar to CVE-2025-52905) lets an attacker smuggle arbitrary command-line options into the invoked tool (e.g., ping). By supplying crafted flags, an attacker can trigger a denial of service (DoS)-for example, by forcing extremely long runtimes or resource-intensive behavior-leading to router hangs/reboots and the potential to overwhelm remote hosts or upstream networks.
 
-3.	Exact product that was found to be vulnerable including complete version information
+## 3. Exact product that was found to be vulnerable including complete version information
     a. vulnerable code exists in TOTOLink X5000R_Latest
 
     b. We tested the vulnerability on TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515
 
-4. Root Cause Analysis
+## 4. Root Cause Analysis
 
     Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/lighttpd
 
@@ -61,7 +61,7 @@ int __fastcall sub_413BB8(int a1)
     Add validation to reject values beginning with '-' and move from shell-based execution to exec* with an argv array and -- end-of-options delimiter; additionally, enforce strict allow-listing for host/IP and bound all numeric parameters.
 
     
-5.   Exploit
+## 5. Exploit
 
 ```python
 import requests
@@ -243,7 +243,7 @@ if __name__ == "__main__":
         print("\nThe final authentication was not successful. The following requests could not be processed.")
 ```
 
-6. Disclosure Timeline
+## 6. Disclosure Timeline
     - 2025-10-22: Vulnerability reported to vendor (TOTOLINK).
     - 2025-12-21: No response from vendor after 60 days.
     - 2025-12-22: Vulnerability reported to MITRE (CVE Assignment Team).
