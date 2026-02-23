@@ -3,16 +3,19 @@
     
     a.  TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515 OS Command Injection
 
-2. High-level overview of the vulnerability and the possible effect of using it
+    b.  Vulnerability Type: OS Command Injection (CWE-78)
+
+
+3. High-level overview of the vulnerability and the possible effect of using it
 
     In the setIptvCfg handler, vlanVidLan1 (from Uci_Get_Str) is inserted into snprintf("ifconfig br-vlan%s down", v91) and passed to CsteSystem without validation, allowing shell metacharacters (e.g. ;, #) to enable arbitrary command execution (RCE).
 
-3.	Exact product that was found to be vulnerable including complete version information
+4.	Exact product that was found to be vulnerable including complete version information
     a. vulnerable code exists in TOTOLink X5000R_Latest
 
     b. We tested the vulnerability on TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515
 
-4. Root Cause Analysis
+5. Root Cause Analysis
 
     Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/lighttpd
 
