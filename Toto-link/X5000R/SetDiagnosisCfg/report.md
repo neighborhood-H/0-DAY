@@ -3,16 +3,18 @@
     
     a.  TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515 Ping of Death
 
-2. High-level overview of the vulnerability and the possible effect of using it
+    b.  Vulnerability Type: Argument Injection (CWE-88)
+
+3. High-level overview of the vulnerability and the possible effect of using it
 
     In the affected handler, user-supplied parameters are embedded into a system command without validating or rejecting hyphen-prefixed arguments. This argument-injection issue (similar to CVE-2025-52905) lets an attacker smuggle arbitrary command-line options into the invoked tool (e.g., ping). By supplying crafted flags, an attacker can trigger a denial of service (DoS)-for example, by forcing extremely long runtimes or resource-intensive behavior-leading to router hangs/reboots and the potential to overwhelm remote hosts or upstream networks.
 
-3.	Exact product that was found to be vulnerable including complete version information
+4.	Exact product that was found to be vulnerable including complete version information
     a. vulnerable code exists in TOTOLink X5000R_Latest
 
     b. We tested the vulnerability on TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515
 
-4. Root Cause Analysis
+5. Root Cause Analysis
 
     Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/lighttpd
 
