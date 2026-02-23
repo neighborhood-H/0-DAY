@@ -4,26 +4,26 @@
 
 - **Vulnerability Type:** OS Command Injection (CWE-78)
 
-## 1.	Vulnerability Title
+## 1. Vulnerability Title
     
-    a.  TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515 OS Command Injection
+#### a.  TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515 OS Command Injection
 
 ## 2. High-level overview of the vulnerability and the possible effect of using it
 
 In the `setIptvCfg` handler of the `/usr/sbin/lighttpd` executable, `vlanVidLan1` (from Uci_Get_Str) is inserted into `snprintf("ifconfig br-vlan%s down", v91)` and passed to `CsteSystem` without validation, allowing shell metacharacters (e.g. ;, #) to enable arbitrary command execution (RCE).
 
-## 3.	Exact product that was found to be vulnerable including complete version information
-    a. vulnerable code exists in TOTOLink X5000R_Latest
+## 3. Exact product that was found to be vulnerable including complete version information
+#### a. vulnerable code exists in TOTOLink X5000R_Latest
 
-    b. We tested the vulnerability on TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515
+#### b. We tested the vulnerability on TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515
 
 ## 4. Root Cause Analysis
 
-    Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/lighttpd
+Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/lighttpd
 
-    a. Detailed description of the vulnerability
+#### a. Detailed description of the vulnerability
     
-    In the function sub_415F58, the vlanVidLan value loaded via Uci_Get_Str is inserted verbatim into a shell command string (e.g. snprintf("ifconfig br-vlan%s down", v91)) without any validation or filtering, and that string is executed by the OS shell via CsteSystem
+In the function sub_415F58, the vlanVidLan value loaded via Uci_Get_Str is inserted verbatim into a shell command string (e.g. snprintf("ifconfig br-vlan%s down", v91)) without any validation or filtering, and that string is executed by the OS shell via CsteSystem
 
 ```c
       //... omitted ...
@@ -111,11 +111,11 @@ In the `setIptvCfg` handler of the `/usr/sbin/lighttpd` executable, `vlanVidLan1
         //... omitted ...
 ```
 
-    b. suggested fixes
-    Validate vlanVidLan1 with s_cmd_string_valid() and a numeric whitelist (1–4094); if validation fails, reject and log. Do not embed input in shell strings—use execl/execv or native APIs and run CGI with least privilege.
+#### b. suggested fixes
+Validate vlanVidLan1 with s_cmd_string_valid() and a numeric whitelist (1–4094); if validation fails, reject and log. Do not embed input in shell strings—use execl/execv or native APIs and run CGI with least privilege.
 
 ## 5. Exploit
-    The exploit was executed by sending the above HTTP POST request via Burp Suite’s Repeater. The crafted vlanVidLan1 payload ("1; ls / ;#") was delivered to the setIptvCfg endpoint, resulting in remote command execution; the command output was returned to the client in the HTTP response body according to the CGI behavior.
+The exploit was executed by sending the above HTTP POST request via Burp Suite’s Repeater. The crafted vlanVidLan1 payload ("1; ls / ;#") was delivered to the setIptvCfg endpoint, resulting in remote command execution; the command output was returned to the client in the HTTP response body according to the CGI behavior.
 
 
 ```python
@@ -333,8 +333,8 @@ sudo chroot . /bin/sh -c 't=$(date +%s); echo -n "$t" | md5sum | awk "{print \$1
 sudo chroot . /bin/sh -c 'mkdir -p /var/cste; echo "remote_ipaddr=192.168.0.5" > /var/cste/temp_status'
 
 ## 6. Disclosure Timeline
-    - 2025-10-22: Vulnerability reported to vendor (TOTOLINK).
-    - 2025-12-21: No response from vendor after 60 days.
-    - 2025-12-22: Vulnerability reported to MITRE (CVE Assignment Team).
-    - 2026-02-11: CVE ID assigned (RESERVED state).
-    - 2026-02-23: Public disclosure (0-day) and notification to MITRE for publication.
+- 2025-10-22: Vulnerability reported to vendor (TOTOLINK).
+- 2025-12-21: No response from vendor after 60 days.
+- 2025-12-22: Vulnerability reported to MITRE (CVE Assignment Team).
+- 2026-02-11: CVE ID assigned (RESERVED state).
+- 2026-02-23: Public disclosure (0-day) and notification to MITRE for publication.
