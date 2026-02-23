@@ -1,31 +1,32 @@
 # CVE-2025-70327
+**Discoverer:** Neighborhood-Hacker Team
+**Vulnerability Type:** Argument Injection (CWE-88)
+
 1.	Vulnerability Title
     
     a.  TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515 Ping of Death
 
-    b.  Vulnerability Type: Argument Injection (CWE-88)
+2. High-level overview of the vulnerability and the possible effect of using it
 
-3. High-level overview of the vulnerability and the possible effect of using it
+    In the `setDiagnosisCfg` handler of the `/usr/sbin/lighttpd` executable, user-supplied parameters are embedded into a system command without validating or rejecting hyphen-prefixed arguments. This argument-injection issue (similar to CVE-2025-52905) lets an attacker smuggle arbitrary command-line options into the invoked tool (e.g., ping). By supplying crafted flags, an attacker can trigger a denial of service (DoS)-for example, by forcing extremely long runtimes or resource-intensive behavior-leading to router hangs/reboots and the potential to overwhelm remote hosts or upstream networks.
 
-    In the affected handler, user-supplied parameters are embedded into a system command without validating or rejecting hyphen-prefixed arguments. This argument-injection issue (similar to CVE-2025-52905) lets an attacker smuggle arbitrary command-line options into the invoked tool (e.g., ping). By supplying crafted flags, an attacker can trigger a denial of service (DoS)-for example, by forcing extremely long runtimes or resource-intensive behavior-leading to router hangs/reboots and the potential to overwhelm remote hosts or upstream networks.
-
-4.	Exact product that was found to be vulnerable including complete version information
+3.	Exact product that was found to be vulnerable including complete version information
     a. vulnerable code exists in TOTOLink X5000R_Latest
 
     b. We tested the vulnerability on TOTOLink X5000R_Latest bug fix version v9.1.0cu_2415_B20250515
 
-5. Root Cause Analysis
+4. Root Cause Analysis
 
     Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/lighttpd
 
     a. Detailed description of the vulnerability
     
-    In the function sub_413BB8, In sub_413BB8, the user-controlled ip parameter is copied straight into a shell command without sanitization:
+    In the function sub_413BB8, the user-controlled ip parameter is copied straight into a shell command without sanitization:
 
-snprintf(v6, 128, "ping %s -w %d &>/var/log/pingCheck", Var, v3);
-CsteSystem(v6, 0);
+    snprintf(v6, 128, "ping %s -w %d &>/var/log/pingCheck", Var, v3);
+    CsteSystem(v6, 0);
 
-Because Var (from websGetVar(..., "ip", ...)) is only checked by is_cmd_string_valid and not restricted from starting with a hyphen, an attacker can inject option-like arguments (e.g., strings beginning with -). This is an argument-injection flaw: the program believes it's inserting a hostname, but the shell-constructed line hands those hyphen-prefixed tokens to ping as flags. By supplying abusive options that prolong execution or increase workload, an attacker can cause a denial of service (DoS) - tying up the router's process/thread and CPU or generating excessive traffic toward remote hosts.
+    Because Var (from websGetVar(..., "ip", ...)) is only checked by is_cmd_string_valid and not restricted from starting with a hyphen, an attacker can inject option-like arguments (e.g., strings beginning with -). This is an argument-injection flaw: the program believes it's inserting a hostname, but the shell-constructed line hands those hyphen-prefixed tokens to ping as flags. By supplying abusive options that prolong execution or increase workload, an attacker can cause a denial of service (DoS) - tying up the router's process/thread and CPU or generating excessive traffic toward remote hosts.
 
 ```c
 int __fastcall sub_413BB8(int a1)
@@ -240,3 +241,10 @@ if __name__ == "__main__":
     else:
         print("\nThe final authentication was not successful. The following requests could not be processed.")
 ```
+
+6. Disclosure Timeline
+    - 2025-10-22: Vulnerability reported to vendor (TOTOLINK).
+    - 2025-12-21: No response from vendor after 60 days.
+    - 2025-12-22: Vulnerability reported to MITRE (CVE Assignment Team).
+    - 2026-02-11: CVE ID assigned (RESERVED state).
+    - 2026-02-23: Public disclosure (0-day) and notification to MITRE for publication.
