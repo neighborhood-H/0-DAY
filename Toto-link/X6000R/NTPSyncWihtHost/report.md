@@ -1,4 +1,4 @@
-# Use CVE-2025-70328
+# CVE-2025-70328
 1.	Vulnerability Title
     
     a.  TOTOLink X6000R_Firmware V9.4.0cu.1498_B20250826 OS Command Injection
