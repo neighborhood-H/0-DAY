@@ -3,17 +3,19 @@
     
     a.  TOTOLink X6000R_Firmware V9.4.0cu.1498_B20250826 OS Command Injection
 
-2.	High-level overview of the vulnerability and the possible effect of using it
+    b.  Vulnerability Type: OS Command Injection (CWE-78)
+
+3.	High-level overview of the vulnerability and the possible effect of using it
 
     The host_time parameter of NTPSyncWithHost is vulnerable to post-auth OS command injection
 
-3.	Exact product that was found to be vulnerable including complete version information
+4.	Exact product that was found to be vulnerable including complete version information
 
     a. vulnerable code exists in X6000R_Firmware V9.4.0cu.1498_B20250826 — specifically the web service binary /usr/sbin/shttpd.
 
     b. We tested the vulnerability against X6000R_Firmware V9.4.0cu.1498_B20250826
 
-4.   Root Cause Analysis
+5.   Root Cause Analysis
   
   Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/shttpd
 
