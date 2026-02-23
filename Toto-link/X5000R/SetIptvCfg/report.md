@@ -1,8 +1,8 @@
 # CVE-2025-70329
 
-**Discoverer:** Neighborhood-Hacker Team
+- **Discoverer:** Neighborhood-Hacker Team
 
-**Vulnerability Type:** OS Command Injection (CWE-78)
+- **Vulnerability Type:** OS Command Injection (CWE-78)
 
 1.	Vulnerability Title
     
