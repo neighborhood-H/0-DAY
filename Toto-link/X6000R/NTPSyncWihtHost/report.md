@@ -2,26 +2,26 @@
 - **Discoverer:** Neighborhood-Hacker Team
 - **Vulnerability Type:** OS Command Injection (CWE-78)
 
-1.	Vulnerability Title
+## 1.	Vulnerability Title
     
-    a.  TOTOLink X6000R_Firmware V9.4.0cu.1498_B20250826 OS Command Injection
+#### a.  TOTOLink X6000R_Firmware V9.4.0cu.1498_B20250826 OS Command Injection
 
 
-2.	High-level overview of the vulnerability and the possible effect of using it
+## 2.	High-level overview of the vulnerability and the possible effect of using it
 
-    The `host_time` parameter of the `NTPSyncWithHost` handler in the `/usr/sbin/shttpd` executable is vulnerable to post-auth OS command injection. This allows an attacker to execute arbitrary system commands, leading to full system compromise (RCE).
+The `host_time` parameter of the `NTPSyncWithHost` handler in the `/usr/sbin/shttpd` executable is vulnerable to post-auth OS command injection. This allows an attacker to execute arbitrary system commands, leading to full system compromise (RCE).
 
-3.	Exact product that was found to be vulnerable including complete version information
+## 3.	Exact product that was found to be vulnerable including complete version information
 
-    a. vulnerable code exists in X6000R_Firmware V9.4.0cu.1498_B20250826 — specifically the web service binary /usr/sbin/shttpd.
+#### a. vulnerable code exists in X6000R_Firmware V9.4.0cu.1498_B20250826 — specifically the web service binary /usr/sbin/shttpd.
 
-    b. We tested the vulnerability against X6000R_Firmware V9.4.0cu.1498_B20250826
+#### b. We tested the vulnerability against X6000R_Firmware V9.4.0cu.1498_B20250826
 
-4.   Root Cause Analysis
+## 4. Root Cause Analysis
   
-  Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/shttpd
+Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/shttpd
 
-  a. Detailed description of the vulnerability
+#### a. Detailed description of the vulnerability
 
 In the function sub_4181A4, the host_time parameter received from the client is processed and passed directly into a shell command without proper sanitization. Only the first and second whitespace-separated tokens of host_time are validated; the remainder of the string is not.
     
@@ -55,11 +55,11 @@ __int64 __fastcall sub_4181A4(__int64 a1, __int64 a2)
   return 0LL;
 }
 ```
-  b.   Suggested fixes
+#### b. Suggested fixes
 
 Apply is_cmd_string_valid() to the entire host_time string (or to every token parsed from it) before embedding the value into a shell command, or — preferably — avoid invoking a shell and use a safe API to set the system time.
 
-5.   Exploit 
+## 5. Exploit 
   
 ```python
 import argparse
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     main()
 
 ```
-6. Disclosure Timeline
+## 6. Disclosure Timeline
 
 - 2025-10-22: Vulnerability reported to vendor (TOTOLINK).
 - 2025-12-21: No response from vendor after 60 days.
