@@ -7,20 +7,20 @@
 
 >## **purpose**  
 > This repository is a standard README in the repository that is configured for vulnerability research.  
-> 각 취약점 폴더에는 **분석 리포트(`report.md`)**, **PoC(`exploit.py`)**, **시연 영상(`video.mp4`)** 만 간단히 포함하며, 환경 구축(랩·VM·에뮬레이션)은 저장소에서 생략한다.  
+> Each vulnerability folder simply contains only **Analytic Reports ('report.md ')**, **PoC ('exploit.py ')**, and **Display Video ('video.mp4')**, and environmental deployment (lab, VM, emulation) is omitted from the repository.  
 
 
 ---
 
-## 안전 및 책임 규정 
-- 저장소의 자료는 **격리된 실험 환경**에서만 실행해야 한다.  
-- 퍼블릭 네트워크 또는 타인 소유 장비에서의 실행은 금지한다.  
-- PoC 실행 전 반드시 실험 환경(스냅샷 생성, 외부 네트워크 차단 등)을 준비한다.  
-- 악용 목적 사용을 엄격히 금지한다.
+## Safety and Responsibility Regulations
+- Data in the repository shall be executed only in **isolated experimental environments**.
+- It is prohibited from running on public networks or equipment owned by others.
+- Make sure to prepare an experimental environment (snapshot generation, external network blocking, etc.) before executing PoC.
+- Strictly prohibit the use of abuse purposes.
 
 ---
 
-## 현재 기준 리포지토리 구조 
+## Current Baseline Repository Structure
 ```
 repository-root/
 ├── Venders/
@@ -32,7 +32,7 @@ repository-root/
 └── README.md
 ```
 
-> 위 구조는 현재 사용 중인 폴더·파일 네이밍 규칙을 반영한 예시다.
+> The above structure is an example reflecting the folder and file naming rules currently in use.
 
 ---
 
