@@ -1,27 +1,30 @@
 # CVE-2025-70328
+**Discoverer:** Neighborhood-Hacker Team
+**Vulnerability Type:** OS Command Injection (CWE-78)
+
 1.	Vulnerability Title
     
     a.  TOTOLink X6000R_Firmware V9.4.0cu.1498_B20250826 OS Command Injection
 
-    b.  Vulnerability Type: OS Command Injection (CWE-78)
 
-3.	High-level overview of the vulnerability and the possible effect of using it
+2.	High-level overview of the vulnerability and the possible effect of using it
 
-    The host_time parameter of NTPSyncWithHost is vulnerable to post-auth OS command injection
+    The `host_time` parameter of the `NTPSyncWithHost` handler in the `/usr/sbin/shttpd` executable is vulnerable to post-auth OS command injection. This allows an attacker to execute arbitrary system commands, leading to full system compromise (RCE).
 
-4.	Exact product that was found to be vulnerable including complete version information
+3.	Exact product that was found to be vulnerable including complete version information
 
     a. vulnerable code exists in X6000R_Firmware V9.4.0cu.1498_B20250826 — specifically the web service binary /usr/sbin/shttpd.
 
     b. We tested the vulnerability against X6000R_Firmware V9.4.0cu.1498_B20250826
 
-5.   Root Cause Analysis
+4.   Root Cause Analysis
   
   Since vendor does not provide source code, the following explanation is based on the firmware binary /usr/sbin/shttpd
 
   a. Detailed description of the vulnerability
 
 In the function sub_4181A4, the host_time parameter received from the client is processed and passed directly into a shell command without proper sanitization. Only the first and second whitespace-separated tokens of host_time are validated; the remainder of the string is not.
+    
 ```c
 __int64 __fastcall sub_4181A4(__int64 a1, __int64 a2)
 {
@@ -169,3 +172,11 @@ if __name__ == "__main__":
     main()
 
 ```
+6. Disclosure Timeline
+
+- 2025-10-22: Vulnerability reported to vendor (TOTOLINK).
+- 2025-12-21: No response from vendor after 60 days.
+- 2025-12-22: Vulnerability reported to MITRE (CVE Assignment Team).
+- 2026-02-11: CVE ID assigned (RESERVED state).
+- 2026-02-23: Public disclosure (0-day) and notification to MITRE for publication.
+
