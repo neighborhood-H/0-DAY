@@ -1,6 +1,7 @@
 # CVE-2025-70327
-**Discoverer:** Neighborhood-Hacker Team
-**Vulnerability Type:** Argument Injection (CWE-88)
+- **Discoverer:** Neighborhood-Hacker Team
+
+- **Vulnerability Type:** Argument Injection (CWE-88)
 
 1.	Vulnerability Title
     
