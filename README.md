@@ -6,7 +6,7 @@
 ---
 
 >## **purpose**  
-> 이 저장소는 취약점 리서치용으로 구성된 레포지토리의 표준 README다.  
+> This repository is a standard README in the repository that is configured for vulnerability research.  
 > 각 취약점 폴더에는 **분석 리포트(`report.md`)**, **PoC(`exploit.py`)**, **시연 영상(`video.mp4`)** 만 간단히 포함하며, 환경 구축(랩·VM·에뮬레이션)은 저장소에서 생략한다.  
 
 
