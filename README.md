@@ -36,35 +36,35 @@ repository-root/
 
 ---
 
-## 파일/폴더 규칙 
-- 각 취약점은 전용 폴더(예: `Vendor/Product/IssueName/`)에 정리한다.  
-- 반드시 포함할 파일:
-  - `report.md` : 취약점 설명(제목, 요약, 영향, 테스트 대상 버전, Root Cause, 권장 수정안, 참고자료, disclosure 로그 등). 사용자가 제공한 본문은 이 파일에 둔다.  
-  - `exploit.py` : PoC 스크립트(기본 비활성화).  
-  - `video.mp4` 또는 `demo.webm` : 시연 영상(민감 정보 편집본).  
+## File/Folder Rules
+- Each vulnerability is organized in a dedicated folder (e.g., `Vendor/Product/IssueName/`).  
+- Files to include without fail:
+  - `report.md` : Description of vulnerabilities (subject, summary, impact, version to be tested, Root Cause, recommended amendments, references, disclosure logs, etc.). User-supplied text shall be placed in this file. 
+  - `exploit.py` : PoC script (default disabled).  
+  - `video.mp4` or `demo.webm` : demonstration video (sensitivity information edited).
 
 ---
 
-## PoC 규칙  
-- PoC 내에 운영 크리덴셜, 내부 IP나 비밀 키를 하드코딩하지 않는다.  
-- 공개 저장소에는 자동 실행형 RCE PoC를 올리지 않는다. 재현 절차·취약 포인트만 공개하고, 실행 코드는 내부 저장소 또는 접근 통제된 브랜치에서 관리한다.  
-
-
----
-
-## 리포지토리 사용 흐름 (간단)
-1. 취약점 식별 → 폴더 생성(`Vendor/Product/Issue`)  
-2. `report.md`에 분석 본문(요약·원인·권고) 작성(사용자가 제공한 본문 파일 포함)  
-3. PoC는 `PoC/` 또는 같은 폴더에 배치하되 비활성화 상태 유지  
-4. 시연 영상은 민감정보 편집 후 `video.mp4`로 저장  
+## PoC Rules 
+- It does not hardcode operational credentials, internal IP, or secret keys within PoC.
+- Auto-executable RCE PoC is not uploaded to public storage. Only reproduction procedures and vulnerable points are disclosed, and execution codes are managed in internal storage or in access-controlled branches.
 
 
 ---
 
-## 부록 — 빠른 체크리스트
-- [ ] `report.md`에 영향 범위와 Suggested Fix 포함 여부 확인  
-- [ ] 데모 영상에서 민감 정보(토큰, 내부 IP 등) 제거 또는 편집 처리  
-- [ ] 실험 전 스냅샷 생성 및 외부 네트워크 차단 확인
+## Repository Usage Flow (Simple)
+1. Vulnerability Identification → Folder Creation(`Vendor/Product/Issue`)  
+2. Prepare the body of analysis (summary, cause, and recommendation) in `report.md` (including the body file provided by the user)
+3. Place PoC in `PoC/` or same folder but remain inactive 
+4. After editing the sensitive information, save the demonstration video as `video.mp4`
+
+
+---
+
+## Appendix — Quick Checklist
+- [ ] Check `report.md` for the extent of impact and the inclusion of a sugary fix
+- [ ] Remove or edit sensitive information (token, internal IP, etc.) from demo video  
+- [ ] Create snapshots and block external networks before the experiment
 
 ---      
          
