@@ -1,7 +1,7 @@
 # CVE-2025-70327
 - **Discoverer:** Neighborhood-Hacker Team
 
-- **Vulnerability Type:** Argument Injection (CWE-88)
+- **Vulnerability Type:** Argument Injection (CWE-88), Uncontrolled Resource Consumption (CWE-400)
 
 ## 1. Vulnerability Title
     
