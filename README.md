@@ -12,6 +12,14 @@
 
 ---
 
+## Quick Links
+- [CVE-2025-70327][./Toto-link/X5000R/SetDiagnosisCfg/report.md]
+- [CVE-2025-70328][./Toto-link/X6000R/NTPSyncWihtHost/report.md]
+- [CVE-2025-70329][./Toto-link/X5000R/SetIptvCfg/report.md]
+
+
+---
+
 ## Safety and Responsibility Regulations
 - Data in the repository shall be executed only in **isolated experimental environments**.
 - It is prohibited from running on public networks or equipment owned by others.
